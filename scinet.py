@@ -117,7 +117,7 @@ def execute_hpc_cwl(credentials: SciNetCredentials,
             pip install toil[cwl]==4.0
             cd {run_uuid}
             singularity pull docker://{workflow.docker_image}
-            TOIL_SLURM_ARGS="-t 00:15:00" toil-cwl-runner \
+            TOIL_SLURM_ARGS="{config.slurm_args}" toil-cwl-runner \
                 --batchSystem slurm --singularity --retryCount 0 \
                 --workDir . --jobStore toil_job_store \
                 workflow.cwl run.cwl
