@@ -8,7 +8,7 @@ if len(sys.argv) < 3:
 credentials = SciNetCredentials(SciNetCluster.Niagara, sys.argv[1], sys.argv[2])
 workflow = SciNetWorkflow()
 workflow.template_cwl = 'seurat-singularity-example.cwl'
-workflow.docker_image = 'crescentdev/crescent-seurat:3.1.4-3.6.3-3.10'
+workflow.docker_image = 'crescentdev/crescent-seurat-droplet-gsva:latest'
 workflow.script_file = 'Runs_Seurat_v3.R'
 input_files = ['barcodes.tsv.gz', 'features.tsv.gz', 'matrix.mtx.gz']
 run = {

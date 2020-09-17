@@ -2,8 +2,8 @@ cwlVersion: v1.0
 class: CommandLineTool
 requirements:
   DockerRequirement:
-    dockerImageId: {host_directory}/crescent-seurat_3.1.4-3.6.3-3.10.sif
-    dockerPull: crescentdev/crescent-seurat:3.1.4-3.6.3-3.10
+    dockerImageId: {host_directory}/crescent-seurat-droplet-gsva_latest.sif
+    dockerPull: crescentdev/crescent-seurat-droplet-gsva:latest
 baseCommand: [Rscript]
 arguments:
   - position: 0
