@@ -76,9 +76,9 @@ def execute_hpc_cwl(credentials: SciNetCredentials,
     run_uuid = 'run-' + datetime.now().isoformat().replace(':', '_')
 
     with SSHClient() as ssh:
-        ssh.set_missing_host_key_policy(AutoAddPolicy)  # SECURITY: INSECURE!
-        # should only permit known server signatures
-        # alternate: ssh.load_system_host_keys()
+        # Compares server's key to known SciNet cluster keys from file
+        ssh.load_host_keys('./scinet_hosts')
+        
         ssh.connect(
             credentials.cluster.value,
             username=credentials.username,
