@@ -3,7 +3,7 @@ import sys
 from scinet import *
 
 if len(sys.argv) < 3:
-    print("Usage: seurat-example.py <SSH username> <SSH password>")
+    print("Usage: seurat-example.py <SSH username> <RSA key path>")
 
 credentials = SciNetCredentials(SciNetCluster.Niagara, sys.argv[1], sys.argv[2])
 workflow = SciNetWorkflow()

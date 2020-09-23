@@ -4,7 +4,7 @@ from io import StringIO
 import json
 from typing import List, Tuple
 
-from paramiko import SSHClient, AutoAddPolicy
+from paramiko import SSHClient, AutoAddPolicy, RSAKey
 from scp import SCPClient
 
 
@@ -17,10 +17,10 @@ class SciNetCluster(Enum):
 
 # TODO: add RSA key support
 class SciNetCredentials:
-    def __init__(self, cluster: SciNetCluster, username: str, password: str):
+    def __init__(self, cluster: SciNetCluster, username: str, RSApath: str):
         self.cluster = cluster
         self.username = username
-        self.password = password
+        self.key = RSAKey.from_private_key_file(RSApath)
 
 
 class SciNetCommonConfig:
@@ -82,7 +82,7 @@ def execute_hpc_cwl(credentials: SciNetCredentials,
         ssh.connect(
             credentials.cluster.value,
             username=credentials.username,
-            password=credentials.password  # SECURITY: RSA key preferred!
+            pkey=credentials.key
         )
 
         stdout, stderr = ssh_exec_or_raise(ssh, 'echo $SCRATCH')
